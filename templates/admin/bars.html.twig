@@ -3,7 +3,7 @@
     <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-                <a href="{{ path('app_admin_index') }}" class="site_title"><i class="fa fa-laptop"></i> <span>INVENTORY</span></a>
+                <a href="{{ path('app_admin_index') }}" class="site_title"><i class="fa fa-laptop"></i> <span>INTERVENTION</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -37,8 +37,8 @@
                             </ul>
                         </li>
                         {% endif %}
-                        {% if is_granted("ROLE_MANAGER") %}
-                        <li><a><i class="fa fa-bookmark"></i>{{ "backend.menu.categories"|trans }} <span class="fa fa-chevron-down"></span></a>
+                        {% if is_granted("ROLE_ADMIN") %}
+                        <li><a><i class="fa fa-bookmark"></i>{{ "Equipment"|trans }} <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="{{ path('app_admin_categories') }}">{{ "backend.menu.manage"|trans }}</a></li>
                             </ul>

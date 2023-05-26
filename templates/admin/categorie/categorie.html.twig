@@ -45,8 +45,8 @@
                                 {% for categorie in categories|filter(categorie => not categorie.deleted)  %}
                                     <tr>
                                         <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ categorie.id }}"></td>
-                                        <td>{{ categorie.libelle }}</td>
-                                        <td>{%  if categorie.categorieParente %} {{ categorie.categorieParente.libelle }} {% endif %}</td>
+                                        <td>{{ categorie.category }}</td>
+                                        <td>{%  if categorie.ParentCategory %} {{ categorie.ParentCategory.category }} {% endif %}</td>
                                         <td><a class="btn btn-primary" href="{{ path('app_admin_edit_categorie',{"id":categorie.id}) }}"><i class="fa fa-edit"></i></a></td>
                                         <td>
                                             {%  if categorie.valid %}

@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ChangePwsdFormType extends AbstractType
-{
+{private $translator;
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->translator = $options['translator'];

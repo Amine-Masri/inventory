@@ -38,6 +38,9 @@ class Role
 
         return $this;
     }
-
+    public function __toString(): string
+    {
+        return $this->getRoleName(); // Return a string representation of the role (e.g., name)
+    }
 
 }

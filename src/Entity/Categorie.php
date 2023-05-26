@@ -65,7 +65,7 @@ class Categorie
 
     public function setCategory(string $category): self
     {
-        $this->libelle = $category;
+        $this->category = $category;
 
         return $this;
     }

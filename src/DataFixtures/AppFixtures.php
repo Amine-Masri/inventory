@@ -6,22 +6,15 @@ use App\Entity\Role;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $encoder;
-    /**
-     * AppFixtures constructor.
-     * @param UserPasswordEncoderInterface $userPasswordEncoder
-     */
-    public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
+    private $passwordHasher;
+   
+    public function __construct(UserPasswordHasherInterface  $passwordHasher)
     {
-        $this->encoder = $userPasswordEncoder;
+        $this->passwordHasher = $passwordHasher;
     }
 
     public function load(ObjectManager $manager)
@@ -29,8 +22,8 @@ class AppFixtures extends Fixture
         $roles = [
             "ROLE_SUPERUSER" => "Super Admin",
             "ROLE_ADMINISTRATOR" => "Admin",
-            "ROLE_MANAGER" => "Manager",
-            "ROLE_USER" => "User"
+            "ROLE_TECH" => "Manager",
+            "ROLE_CLIENT" => "User"
         ];
 
         foreach ($roles as $key => $value) {
@@ -46,15 +39,30 @@ class AppFixtures extends Fixture
         if (!$manager->find(User::class, 1)) {
             $user->setUsername('admin');
             $user->setRoles(["ROLE_SUPERUSER"]);
-            $user->setPassword($this->encoder->encodePassword($user, 'admin'));
+            $plainPassword ='admin';
+            $user->setPassword($hashedPassword = $this->passwordHasher->hashPassword($user, $plainPassword));
             $user->setNomComplet('Admin');
             $user->setEmail('admin@example.com');
             $user->setValid(true);
             $user->setDeleted(false);
             $user->setAdmin(true);
             $manager->persist($user);
-
             $manager->flush();
         }
-    }
-}
+             /*if(!$manager->find(User::class, 2)){
+            $user->setUsername('test');
+            $user->setRoles(["ROLE_CLIENT"]);
+            $plainPassword ='test';
+            $user->setPassword($hashedPassword = $this->passwordHasher->hashPassword($user, $plainPassword));
+            $user->setNomComplet('test');
+            $user->setEmail('test@test.com');
+            $user->setValid(true);
+            $user->setDeleted(false);
+            $user->setAdmin(false);
+            $manager->persist($user);}
+            $manager->flush();
+
+        }*/
+            
+    } }
+    

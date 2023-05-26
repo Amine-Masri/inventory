@@ -19,7 +19,7 @@ class CategorieFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('CategoryName')
+            ->add('Category')
             ->add('ParentCategory',EntityType::class,[
                 "class"=>Categorie::class,
                 "query_builder"=>function(CategorieRepository $categorieRepository){

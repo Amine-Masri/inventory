@@ -19,6 +19,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class User implements UserInterface, EquatableInterface
 {
+    public function getUserIdentifier(): string
+    {
+        return $this->username; // Return the unique identifier for the user, such as email
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -105,7 +109,7 @@ class User implements UserInterface, EquatableInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_CLIENT';
 
         return array_unique($roles);
     }
